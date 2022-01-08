@@ -43,6 +43,7 @@ class Member(PartialMember, total=False):
     user: User
     nick: str
     premium_since: str
+    communication_disabled_until: str
     pending: bool
     permissions: str
 
@@ -51,6 +52,7 @@ class _OptionalMemberWithUser(PartialMember, total=False):
     avatar: str
     nick: str
     premium_since: str
+    communication_disabled_until: str
     pending: bool
     permissions: str
 

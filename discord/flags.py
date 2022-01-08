@@ -538,6 +538,7 @@ class Intents(BaseFlags):
         - :attr:`Member.roles`
         - :attr:`Member.nick`
         - :attr:`Member.premium_since`
+        - :attr:`Member.communication_disabled_until`
         - :attr:`User.name`
         - :attr:`User.avatar`
         - :attr:`User.discriminator`
