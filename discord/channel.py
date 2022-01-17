@@ -708,6 +708,8 @@ class TextChannel(discord.abc.Messageable, discord.abc.GuildChannel, Hashable):
         invitable: :class:`bool`
             Whether non-moderators can add other non-moderators to a thread. Only available when
             creating a private thread.
+
+            .. versionadded:: 2.1
         reason: :class:`str`
             The reason for creating a new thread. Shows up on the audit log.
 
