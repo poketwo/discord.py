@@ -175,7 +175,7 @@ class Thread(Messageable, Hashable):
         self.id: int = int(data['id'])
         self.parent_id: int = int(data['parent_id'])
         self.owner_id: int = int(data['owner_id'])
-        self.name: str = data['name']
+        self.name: str = data.get('name')
         self._type: ThreadChannelType = try_enum(ChannelType, data['type'])  # type: ignore
         self.last_message_id: Optional[int] = _get_as_snowflake(data, 'last_message_id')
         self.slowmode_delay: int = data.get('rate_limit_per_user', 0)
