@@ -372,7 +372,7 @@ class TextChannel(discord.abc.Messageable, discord.abc.GuildChannel, Hashable):
 
     def _update(self, guild: Guild, data: Union[TextChannelPayload, NewsChannelPayload]) -> None:
         self.guild: Guild = guild
-        self.name: str = data['name']
+        self.name: str = data.get('name')
         self.category_id: Optional[int] = utils._get_as_snowflake(data, 'parent_id')
         self.topic: Optional[str] = data.get('topic')
         self.position: int = data['position']
@@ -1105,7 +1105,7 @@ class VocalGuildChannel(discord.abc.Messageable, discord.abc.Connectable, discor
 
     def _update(self, guild: Guild, data: Union[VoiceChannelPayload, StageChannelPayload]) -> None:
         self.guild: Guild = guild
-        self.name: str = data['name']
+        self.name: str = data.get('name')
         self.nsfw: bool = data.get('nsfw', False)
         self.rtc_region: Optional[str] = data.get('rtc_region')
         self.video_quality_mode: VideoQualityMode = try_enum(VideoQualityMode, data.get('video_quality_mode', 1))
@@ -2061,7 +2061,7 @@ class CategoryChannel(discord.abc.GuildChannel, Hashable):
 
     def _update(self, guild: Guild, data: CategoryChannelPayload) -> None:
         self.guild: Guild = guild
-        self.name: str = data['name']
+        self.name: str = data.get('name')
         self.category_id: Optional[int] = utils._get_as_snowflake(data, 'parent_id')
         self.nsfw: bool = data.get('nsfw', False)
         self.position: int = data['position']
@@ -2473,7 +2473,7 @@ class ForumChannel(discord.abc.GuildChannel, Hashable):
 
     def _update(self, guild: Guild, data: Union[ForumChannelPayload, MediaChannelPayload]) -> None:
         self.guild: Guild = guild
-        self.name: str = data['name']
+        self.name: str = data.get('name')
         self.category_id: Optional[int] = utils._get_as_snowflake(data, 'parent_id')
         self.topic: Optional[str] = data.get('topic')
         self.position: int = data['position']
