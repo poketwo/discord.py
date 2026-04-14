@@ -86,17 +86,8 @@ else:
 
 _ZSTD_SOURCE: Literal['zstandard', 'compression.zstd'] | None = None
 
-try:
-    from zstandard import ZstdDecompressor  # type: ignore
-
-    _ZSTD_SOURCE = 'zstandard'
-except ImportError:
-    try:
-        from compression.zstd import ZstdDecompressor  # type: ignore
-
-        _ZSTD_SOURCE = 'compression.zstd'
-    except ImportError:
-        import zlib
+# Force zlib for gateway proxy compatibility
+import zlib
 
 
 __all__ = (
