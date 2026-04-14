@@ -137,7 +137,7 @@ class TeamMember(BaseUser):
     def __init__(self, team: Team, state: ConnectionState, data: TeamMemberPayload) -> None:
         self.team: Team = team
         self.membership_state: TeamMembershipState = try_enum(TeamMembershipState, data['membership_state'])
-        self.permissions: List[str] = data['permissions']
+        self.permissions: List[str] = data.get('permissions', [])
         super().__init__(state=state, data=data['user'])
 
     def __repr__(self) -> str:
