@@ -166,7 +166,11 @@ class Shard:
         retry = self._backoff.delay()
         _log.error('Attempting a reconnect for shard ID %s in %.2fs', self.id, retry, exc_info=e)
         await asyncio.sleep(retry)
-        self._queue_put(EventItem(EventType.reconnect, self, e))
+        # Always try to RESUME, like Client.connect: the gateway invalidates the session if it can't.
+        if self.ws.session_id is not None:
+            self._queue_put(EventItem(EventType.resume, self, ReconnectWebSocket(self.id, resume=True)))
+        else:
+            self._queue_put(EventItem(EventType.reconnect, self, e))
 
     async def worker(self) -> None:
         while not self._client.is_closed():
